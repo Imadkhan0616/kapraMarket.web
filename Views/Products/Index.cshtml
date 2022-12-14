@@ -1,0 +1,53 @@
+﻿@model IEnumerable<kapraMarket.web.Models.Products>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>Add Products</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.productName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productDescription)
+            </td>
+            <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.productId">Edit</a> |
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.productId">Details</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.productId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
