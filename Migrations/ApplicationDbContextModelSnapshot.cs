@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using kapraMarket.web.Data;
 
@@ -12,10 +11,9 @@ using kapraMarket.web.Data;
 namespace kapraMarket.web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221214194419_initialCreate_kapraMarket")]
-    partial class initialCreate_kapraMarket
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,6 +21,46 @@ namespace kapraMarket.web.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("kapraMarket.web.Models.Categories", b =>
+                {
+                    b.Property<int>("categoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("categoryId"), 1L, 1);
+
+                    b.Property<string>("categoryDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("categoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("categoryId");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("kapraMarket.web.Models.Orders", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("Orders");
+                });
 
             modelBuilder.Entity("kapraMarket.web.Models.Permission", b =>
                 {
@@ -36,6 +74,33 @@ namespace kapraMarket.web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("permissions");
+                });
+
+            modelBuilder.Entity("kapraMarket.web.Models.Products", b =>
+                {
+                    b.Property<int>("productId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("productId"), 1L, 1);
+
+                    b.Property<string>("productDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("productName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("productPrice")
+                        .HasColumnType("real");
+
+                    b.Property<int>("productQuantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("productId");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("kapraMarket.web.Models.RoleClaimsViewModel", b =>
@@ -81,73 +146,6 @@ namespace kapraMarket.web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("userRoles");
-                });
-
-            modelBuilder.Entity("kapraMarket.web.Models.Categories", b =>
-                {
-                    b.Property<int>("categoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("categoryId"), 1L, 1);
-
-                    b.Property<string>("categoryDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("categoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("categoryId");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("kapraMarket.web.Models.Orders", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("kapraMarket.web.Models.Products", b =>
-                {
-                    b.Property<int>("productId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("productId"), 1L, 1);
-
-                    b.Property<string>("productDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("productName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("productPrice")
-                        .HasColumnType("real");
-
-                    b.Property<int>("productQuantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("productId");
-
-                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>

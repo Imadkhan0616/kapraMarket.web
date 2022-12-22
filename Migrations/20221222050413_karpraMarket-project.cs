@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace kapraMarket.web.Migrations
 {
-    public partial class initialCreate_kapraMarket : Migration
+    public partial class karpraMarketproject : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
